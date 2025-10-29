@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Oct 23 21:02:12 2025
-
-@author: User
-"""
 import random
 
 def decideOperation():
@@ -75,5 +69,6 @@ while play != "N":
     displayResults(points)
     play = input("Wanna play again? [Y/N]\n\n").upper()
 print("Goodbye!")
+
 
 
