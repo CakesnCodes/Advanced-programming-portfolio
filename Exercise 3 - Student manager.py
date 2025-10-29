@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 20 13:41:31 2025
-
-@author: User
-"""
-
 from tkinter import * 
 from tkinter import filedialog, ttk
 root = Tk()
@@ -106,5 +99,6 @@ txtarea.grid(row=3,column=0, columnspan=3)
 scrollV = Scrollbar(root,orient='vertical', command=txtarea.yview)
 scrollV.grid(row=3,column=2,sticky='ns')
 txtarea.config(yscrollcommand=scrollV.set)
+
 
 root.mainloop()
