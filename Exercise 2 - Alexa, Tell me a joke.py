@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Oct  5 13:38:39 2025
-
-@author: User
-"""
 import random
 from tkinter import * 
 from tkinter import filedialog
@@ -53,4 +47,5 @@ ask.pack(pady=10)
 
 
 root.mainloop() #Opens application
+
 
