@@ -30,7 +30,7 @@ root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=2)
 root.columnconfigure(3, weight=2)
 
-def whut():
+def oops():
     txta1.delete("1.0","end")
     txta2.delete("1.0","end")
     Shirley.config(image=sherWhut)
@@ -65,7 +65,7 @@ def orderup(url):
     try:
         Drink_name = drinks[0]['strDrink'] # Access Drink name
         drinkName.config(text=Drink_name)
-    except: whut()
+    except: oops()
     finally:
         image_url = drinks[0]['strDrinkThumb'] # Access Drink image url
         image_response = requests.get(image_url)
@@ -119,5 +119,6 @@ txta2.grid(row=7, column=0,columnspan=5,sticky="nsew",padx=20, pady=5)
 scrollV = Scrollbar(root,orient='vertical', command=txta2.yview)
 scrollV.grid(row=7,column=4,sticky='ns')
 txta2.config(yscrollcommand=scrollV.set)
+
 
 root.mainloop()
