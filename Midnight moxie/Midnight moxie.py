@@ -42,16 +42,21 @@ def recipe(drinks):
     ingredients = []
     while True:
         x += 1
-        if (drinks[0][f'strIngredient{x}']) == None and (drinks[0][f'strMeasure{x}']) == None: #if nothing,
+        if (drinks[0][f'strMeasure{x}']) == None and (drinks[0][f'strIngredient{x}']) == None:
             break
         else:
-            ingredient = drinks[0][f'strIngredient{x}'].capitalize()
-            if (drinks[0][f'strMeasure{x}']) != None: measure = drinks[0][f'strMeasure{x}'] #if the ingredient is NOT nothing, make variable
+            if (drinks[0][f'strMeasure{x}']) != None: measure = drinks[0][f'strMeasure{x}']
+            else: measure = ""
+            if (drinks[0][f'strIngredient{x}']) != None: ingredient = drinks[0][f'strIngredient{x}'].capitalize()
+            else: break
             ingredients.append(f"{measure} {ingredient}\n")
     instructions = drinks[0]['strInstructions']
-    for i in ingredients:
-        txta1.insert(END,i)
-    txta2.insert(END,instructions)
+    if not ingredients:txta1.insert(END,"Oops! No ingredients provided for this one!")
+    else:    
+        for i in ingredients:
+            txta1.insert(END,i)
+    if instructions == None: txta2.insert(END,"Oops! No intructions provided for this one!")
+    else:txta2.insert(END,instructions)
 
 def orderup(url):
     response = requests.get(url)
@@ -95,7 +100,7 @@ def orderdrink():
     
 
 MM = Label(root, text="Midnight Moxie" ,font=('Georgia Bold',22), bg='#1b1b1b',fg="#F4B71D")
-MM.grid(row=0,column=0,columnspan=4,sticky="ew")
+MM.grid(row=0,column=0,columnspan=4,sticky="ew", pady=5)
 
 Shirley = Label(root, image=sherIdle, bg="#1b1b1b", highlightthickness=2, highlightbackground= "white")
 Shirley.grid(row=1,column=0, columnspan=2, rowspan=2)
