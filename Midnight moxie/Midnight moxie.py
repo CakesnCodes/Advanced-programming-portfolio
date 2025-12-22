@@ -1,5 +1,6 @@
 import requests
 import io
+import random
 from tkinter import * 
 from tkinter import filedialog #responsible for reading files
 from PIL import ImageTk, Image
@@ -22,19 +23,17 @@ img3 = Image.open("Shirley Whut.png")
 img3 = img3.resize((300,388))
 sherWhut= ImageTk.PhotoImage(img3)
 
-img4 = Image.open("mystery juice.png") 
-img4 = img4.resize((80,80))
-phdrink= ImageTk.PhotoImage(img4)
-
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=2)
 root.columnconfigure(3, weight=2)
 
-def oops():
+def whut():
+    huh = ["I'm sorry?", "Could you repeat that, please?", "What was that?", "Hmm?", "Come again?"]
+    err = random.choice(huh)
     txta1.delete("1.0","end")
     txta2.delete("1.0","end")
     Shirley.config(image=sherWhut)
-    drinkName.config(text="What was that?")
+    drinkName.config(text=err)
 
 def recipe(drinks):
     txta1.delete("1.0","end")
@@ -65,8 +64,8 @@ def orderup(url):
     try:
         Drink_name = drinks[0]['strDrink'] # Access Drink name
         drinkName.config(text=Drink_name)
-    except: oops()
-    finally:
+    except: whut()
+    else: #Display drink image
         image_url = drinks[0]['strDrinkThumb'] # Access Drink image url
         image_response = requests.get(image_url)
         if image_response.status_code == 200:
@@ -76,7 +75,10 @@ def orderup(url):
             image_label = Label(root, image=image, bg="#1b1b1b") # keep a reference to the image to prevent garbage collection 
             image_label.image = image
             image_label.grid(row=2,column=0,rowspan=3,columnspan=1)
-        else:
+        else: #If an image is not available, use mystery drink
+            img4 = Image.open("mystery juice.png") 
+            img4 = img4.resize((80,80))
+            phdrink= ImageTk.PhotoImage(img4)
             image_label = Label(root, image=phdrink, bg="#1b1b1b")
             image_label.image = phdrink
             image_label.grid(row=2,column=0,rowspan=3,columnspan=1)
@@ -98,7 +100,7 @@ MM.grid(row=0,column=0,columnspan=4,sticky="ew")
 Shirley = Label(root, image=sherIdle, bg="#1b1b1b", highlightthickness=2, highlightbackground= "white")
 Shirley.grid(row=1,column=0, columnspan=2, rowspan=2)
 
-drinkName = Label(root, text="Serving..." ,font=('Georgia',17), bg='#1b1b1b',fg="white", wraplength=190)
+drinkName = Label(root, text="Serving..." ,font=('Georgia',17), bg='#1b1b1b',fg="white", wraplength=200)
 drinkName.grid(row=1, column=3, sticky="n",columnspan=4)
 
 txta1=Text(root, width=25, height=15, bg="#2f2f2f", fg="white", relief="flat", wrap='word', highlightthickness=5, highlightbackground = "#783F1A", font=('Verdana',10))
@@ -119,6 +121,5 @@ txta2.grid(row=7, column=0,columnspan=5,sticky="nsew",padx=20, pady=5)
 scrollV = Scrollbar(root,orient='vertical', command=txta2.yview)
 scrollV.grid(row=7,column=4,sticky='ns')
 txta2.config(yscrollcommand=scrollV.set)
-
 
 root.mainloop()
