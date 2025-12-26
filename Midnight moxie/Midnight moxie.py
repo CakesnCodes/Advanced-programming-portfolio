@@ -23,6 +23,8 @@ img3 = Image.open("Shirley Whut.png")
 img3 = img3.resize((300,388))
 sherWhut= ImageTk.PhotoImage(img3)
 
+#^^^ These PNGs are made by me
+
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=2)
 root.columnconfigure(3, weight=2)
@@ -52,9 +54,8 @@ def recipe(drinks):
             ingredients.append(f"{measure} {ingredient}\n")
     instructions = drinks[0]['strInstructions']
     if not ingredients:txta1.insert(END,"Oops! No ingredients provided for this one!")
-    else:    
-        for i in ingredients:
-            txta1.insert(END,i)
+    else: 
+        for i in ingredients: txta1.insert(END,i)
     if instructions == None: txta2.insert(END,"Oops! No intructions provided for this one!")
     else:txta2.insert(END,instructions)
 
@@ -63,8 +64,6 @@ def orderup(url):
     data = response.json()
     drinks = data["drinks"]
     Shirley.config(image=sherTalk)
-    #Snowing Ingredients list
-    txta1.delete("1.0","end")
     #Trying to show drink name (incase of failed search)
     try:
         Drink_name = drinks[0]['strDrink'] # Access Drink name
@@ -80,14 +79,14 @@ def orderup(url):
             image_label = Label(root, image=image, bg="#1b1b1b") # keep a reference to the image to prevent garbage collection 
             image_label.image = image
             image_label.grid(row=2,column=0,rowspan=3,columnspan=1)
-        else: #If an image is not available, use mystery drink
+        else: #If an image is not available, use mystery drink (Png made by me)
             img4 = Image.open("mystery juice.png") 
             img4 = img4.resize((80,80))
             phdrink= ImageTk.PhotoImage(img4)
             image_label = Label(root, image=phdrink, bg="#1b1b1b")
             image_label.image = phdrink
             image_label.grid(row=2,column=0,rowspan=3,columnspan=1)
-        recipe(drinks)
+        recipe(drinks) #output ingredients and recipe
 
 def surpriseme():
     url = "https://www.thecocktaildb.com/api/json/v1/1/random.php" 
