@@ -29,9 +29,9 @@ root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=2)
 root.columnconfigure(3, weight=2)
 
-def whut():
+def whut(): #Error frame
     huh = ["I'm sorry?", "Could you repeat that, please?", "What was that?", "Hmm?", "Come again?"]
-    err = random.choice(huh)
+    err = random.choice(huh) #Randomly pull from these ^^^
     txta1.delete("1.0","end")
     txta2.delete("1.0","end")
     Shirley.config(image=sherWhut)
@@ -45,17 +45,17 @@ def recipe(drinks):
     while True:
         x += 1
         if (drinks[0][f'strMeasure{x}']) == None and (drinks[0][f'strIngredient{x}']) == None:
-            break
+            break #If there are no measurements or ingredients, Break
         else:
             if (drinks[0][f'strMeasure{x}']) != None: measure = drinks[0][f'strMeasure{x}']
-            else: measure = ""
+            else: measure = "" #If there are no measuremente, Return blank ()
             if (drinks[0][f'strIngredient{x}']) != None: ingredient = drinks[0][f'strIngredient{x}'].capitalize()
-            else: break
+            else: break #If there are no ingredients, Break
             ingredients.append(f"{measure} {ingredient}\n")
     instructions = drinks[0]['strInstructions']
     if not ingredients:txta1.insert(END,"Oops! No ingredients provided for this one!")
     else: 
-        for i in ingredients: txta1.insert(END,i)
+        for i in ingredients: txta1.insert(END,i) #Loop through and put every ngredient into text box
     if instructions == None: txta2.insert(END,"Oops! No intructions provided for this one!")
     else:txta2.insert(END,instructions)
 
@@ -89,11 +89,11 @@ def orderup(url):
         recipe(drinks) #output ingredients and recipe
 
 def surpriseme():
-    url = "https://www.thecocktaildb.com/api/json/v1/1/random.php" 
+    url = "https://www.thecocktaildb.com/api/json/v1/1/random.php" #SPIN THE WHEEL!
     orderup(url)
 
 def orderdrink():
-    search = txt.get()
+    search = txt.get() #Take input from textbox
     url= f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={search}"
     orderup(url)
     
@@ -125,5 +125,6 @@ txta2.grid(row=7, column=0,columnspan=5,sticky="nsew",padx=20, pady=5)
 scrollV = Scrollbar(root,orient='vertical', command=txta2.yview)
 scrollV.grid(row=7,column=4,sticky='ns')
 txta2.config(yscrollcommand=scrollV.set)
+
 
 root.mainloop()
